@@ -1,9 +1,9 @@
 ---
-- name: pkg - Install package (>= 20.04)
+- name: pkg - Install package (>= 20.04 and Debian)
   apt:
     name: monit
     state: present
-  when: ansible_facts['distribution_version'] is version('20.04', '>=')
+  when: ansible_facts['distribution_version'] is version('20.04', '>=') or (ansible_distribution == "Debian")
 
 - name: pkg - Install package (>= 14.04)
   apt:
@@ -164,4 +164,4 @@
     - service:
         name: monit
         enabled: yes
-  when: ansible_facts['distribution_version'] is version('14.04', '<')
+  when: ansible_facts['distribution_version'] is version('14.04', '<') and (not ansible_distribution == "Debian")

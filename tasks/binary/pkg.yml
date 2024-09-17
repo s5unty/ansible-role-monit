@@ -34,3 +34,11 @@
   when:
     - s.stat.isreg
 
+- name: pkg - /root/.monitrc
+  file:
+    src: "/etc/monit/monitrc"
+    dest: "/etc/monitrc"
+    state: link
+  when:
+    - ansible_facts['distribution'] in [ "Debian", 'Ubuntu' ]
+

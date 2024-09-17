@@ -1,0 +1,36 @@
+---
+- name: pkg - Upgrade package
+  environment:
+    LANGUAGE: en_US
+  unarchive:
+    src: http://nexus.genscript.com/repository/it/ppa.genscript.com/monit/monit-5.34.0-linux-x64.tar.gz
+    dest: /opt/
+    remote_src: yes
+    owner: root
+    group: root
+
+- name: pkg - Check pre-package
+  stat:
+    path: /usr/bin/monit
+  register: s
+
+- block:
+  - name: backup
+    copy:
+      src: /usr/bin/monit
+      dest: /usr/bin/monit.orig
+      remote_src: yes
+
+  - name: move
+    file:
+      path: /usr/bin/monit
+      state: absent
+
+  - name: upgrade
+    file:
+      src: /opt/monit-5.34.0/bin/monit
+      dest: /usr/bin/monit
+      state: link
+  when:
+    - s.stat.isreg
+

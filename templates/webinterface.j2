@@ -2,17 +2,23 @@
 {% if monit_webinterface_enabled %}
 set httpd
   port {{ monit_webinterface_port }}
+    read-only
+  unixsocket /var/run/monit.socket
   use address {{ monit_webinterface_bind }}
+  allow 10.0.0.0/8
+  allow 172.16.0.0/12
+  allow 198.18.0.0/15
+  allow 192.168.0.0/16
 {% if monit_webinterface_acl_rules is defined %}
 {% for rule in monit_webinterface_acl_rules %}
-    allow {{ rule }}
+# allow {{ rule }}
 {% endfor %}
 {% endif %}
 {% if monit_webinterface_rw_group is defined %}
-    allow @{{ monit_webinterface_rw_group }}
+# allow @{{ monit_webinterface_rw_group }}
 {% endif %}
 {% if monit_webinterface_r_group is defined %}
-    allow @{{ monit_webinterface_r_group }} readonly
+# allow @{{ monit_webinterface_r_group }} readonly
 {% endif %}
 {% else %}
 # No Webinterface

@@ -7,6 +7,9 @@
   tags: monit_pkg
   when: ansible_os_family == "RedHat"
 
+- include: binary/pkg.yml
+  tags: monit_binary
+
 - include: config.yml
   tags: monit_config
 

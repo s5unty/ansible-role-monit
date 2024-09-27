@@ -32,6 +32,7 @@
       dest: /usr/bin/monit
       state: link
   when:
+    - s.stat.exists
     - s.stat.isreg
 
 - name: pkg - /root/.monitrc

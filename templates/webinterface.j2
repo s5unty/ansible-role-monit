@@ -5,6 +5,7 @@ set httpd
     read-only
   unixsocket /var/run/monit.socket
   use address {{ monit_webinterface_bind }}
+  allow {{ ansible_host }}
   allow 10.0.0.0/8
   allow 172.16.0.0/12
   allow 198.18.0.0/15

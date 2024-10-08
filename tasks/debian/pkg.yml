@@ -20,22 +20,6 @@
     - file:
         path: "/opt/monit/"
         state: directory
-    - unarchive:
-        src: "http://nexus.genscript.com/repository/it/ppa.genscript.com/monit/monit-5.26.0-linux-x64.tar.gz"
-        dest: "/opt/monit/"
-        remote_src: yes
-    - get_url:
-        url: "http://nexus.genscript.com/repository/it/ppa.genscript.com/monit/monit_build_in_1204"
-        dest: "/opt/monit/monit-5.26.0/bin/monit"
-        mode: 0755
-    - file:
-        src: "/opt/monit/monit-5.26.0/bin/monit"
-        dest: "/usr/local/bin/monit"
-        state: link
-    - file:
-        src: "/etc/monit/monitrc"
-        dest: "/usr/local/etc/monitrc"
-        state: link
     - blockinfile:
         path: "/etc/init.d/monit"
         mode: 0755
@@ -63,7 +47,7 @@
           
           . /lib/lsb/init-functions
           
-          DAEMON=/usr/local/bin/monit
+          DAEMON=/usr/bin/monit
           CONFIG=/etc/monit/monitrc
           NAME=monit
           DESC="daemon monitor"

@@ -43,3 +43,18 @@
   when:
     - ansible_facts['distribution'] in [ "Debian", 'Ubuntu' ]
 
+- name: pkg - systemctl (>= 24.04 and Debian)
+  block:
+  - blockinfile:
+      path: /etc/systemd/system/monit.service.d/override.conf
+      create: yes
+      block: |
+        [Service]
+        CapabilityBoundingSet=CAP_SETUID CAP_SETGID
+        ReadWritePaths=/var/lib/fluent-bit/
+  - shell:
+      cmd: systemctl daemon-reload
+  - service:
+      name: monit
+      state: restarted
+  when: ansible_facts['distribution_version'] is version('24.04', '>=') or (ansible_distribution == "Debian")

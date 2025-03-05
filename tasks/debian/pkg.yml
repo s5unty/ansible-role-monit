@@ -1,13 +1,4 @@
 ---
-- name: pkg - Install package (>= 24.04 and Debian)
-  blockinfile:
-    path: /etc/systemd/system/monit.service.d/override.conf
-    create: yes
-    block: |
-      CapabilityBoundingSet=CAP_DAC_READ_SEARCH CAP_NET_RAW CAP_SYS_PTRACE CAP_SETUID CAP_SETGID
-      ReadWritePaths=/run/ /var/lib/monit/ /var/log/ /var/lib/fluent-bit/
-  when: ansible_facts['distribution_version'] is version('24.04', '>=') or (ansible_distribution == "Debian")
-
 - name: pkg - Install package (>= 20.04 and Debian)
   apt:
     name: monit

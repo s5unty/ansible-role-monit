@@ -3,7 +3,7 @@
 - name: pkg - Install package
   tags: [ install ]
   yum: >
-    name="http://nexus.genscript.com/repository/it/ppa.genscript.com/monit/monit-5.26.0-1.el6.x86_64.rpm"
+    name="https://nexus.genscript.com/repository/it/ppa.genscript.com/monit/monit-5.26.0-1.el6.x86_64.rpm"
     state=present
   when:
     - ansible_facts['distribution'] in [ "CentOS", 'RedHat' ]
@@ -13,7 +13,7 @@
 - name: pkg - Install package
   tags: [ install ]
   yum: >
-    name="http://nexus.genscript.com/repository/it/ppa.genscript.com/monit/monit-5.26.0-1.el7.x86_64.rpm"
+    name="https://nexus.genscript.com/repository/it/ppa.genscript.com/monit/monit-5.26.0-1.el7.x86_64.rpm"
     state=present
   when:
     - ansible_facts['distribution'] in [ "CentOS", 'RedHat' ]

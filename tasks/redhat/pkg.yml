@@ -19,3 +19,23 @@
     - ansible_facts['distribution'] in [ "CentOS", 'RedHat' ]
     - ansible_facts['distribution_major_version'] == "7"
 
+#   name="https://repo.aerisnetwork.com/stable/el/8/x86_64/monit-5.32.0-1.el8.x86_64.rpm"
+- name: pkg - Install package
+  tags: [ install ]
+  yum: >
+    name="https://nexus.genscript.com/repository/it/ppa.genscript.com/monit/monit-5.32.0-1.el8.x86_64.rpm"
+    state=present
+  when:
+    - ansible_facts['distribution'] in [ "CentOS", 'RedHat' ]
+    - ansible_facts['distribution_major_version'] == "8"
+
+#   name="https://repo.aerisnetwork.com/stable/el/8/x86_64/monit-5.32.0-1.el9.x86_64.rpm"
+- name: pkg - Install package
+  tags: [ install ]
+  yum: >
+    name="https://nexus.genscript.com/repository/it/ppa.genscript.com/monit/monit-5.32.0-1.el9.x86_64.rpm"
+    state=present
+  when:
+    - ansible_facts['distribution'] in [ "CentOS", 'RedHat' ]
+    - ansible_facts['distribution_major_version'] == "9"
+

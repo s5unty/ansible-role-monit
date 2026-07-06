@@ -12,7 +12,7 @@ set httpd
   allow 192.168.0.0/16
 {% if monit_webinterface_acl_rules is defined %}
 {% for rule in monit_webinterface_acl_rules %}
-# allow {{ rule }}
+  allow {{ rule }}
 {% endfor %}
 {% endif %}
 {% if monit_webinterface_rw_group is defined %}
